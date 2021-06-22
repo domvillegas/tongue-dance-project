@@ -1,0 +1,1183 @@
+
+/* 
+=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
+
+TABLE OF CONTENTS
+
+SECTION 1: General Styles
+--this code styles general elements like the body, html, etc.
+
+SECTION 2: Introduction Animations
+--this code styles the opening animation of the website (from "Tongue Dance Project" to the home page)
+
+2.1 Scroll Container
+--this code styles the scrollable area and its contents
+
+2.2 "Tongue Dance Project"
+--this code styles the text seen in the introduction
+
+2.3 Pulse Group
+--this code styles the color changing item in the scrollable area
+
+2.4 Boxes
+--this code styles the box at the top of the viewport, the box at the bottom of the viewport, and the animated boxes during the introduction
+
+SECTION 3: Menu
+--this code styles the website's menu
+
+3.1 Opening Animation
+--this code styles the introduction animation for the website's menu
+
+3.2 Menu Items
+--this code styles the individual scrollable containers in the menu
+
+SECTION 4: Back to Menu
+--this code styles the "back to menu" functionality of the website
+
+SECTION 5: Background Image
+--this code styles the background images of the website
+
+SECTION 6: Contact Page
+--this code styles the Contact page
+
+SECTION 7: Archive Page
+--this code styles the Archive page
+
+SECTION 8: Upcoming Page
+--this code styles the Upcoming page
+
+SECTION 9: The Company Page
+--this code styles The Company page
+
+SECTION 10: Media Queries
+
+
+=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=
+*/
+
+/* SECTION 1: General Styles */
+
+/* * {
+    border: 1px solid red;
+} */
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    position: fixed;
+
+    -webkit-overflow-scrolling: auto;
+    
+}
+
+h1 {
+    color: white;
+    width: 100%;
+    margin: 0;
+    margin-left: 20px;
+
+    text-shadow: 3px 4px 9px black;
+}
+
+p {
+    margin-left: 20px;
+    z-index: 2;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    letter-spacing: 1px;
+
+    text-shadow: 2px 0px black;
+}
+
+a {
+    color: inherit;
+}
+
+#preload {
+    display: none;
+}
+
+/* SECTION 2: Introduction Animations */
+
+/* 2.1 Scroll Container */
+
+
+/* the container below contains both "Tongue Dance Project" item and the color changing item */
+/* note: I added overflow:hidden to some of this code because 1) I had to add 100vh to #opening-animation-text-group because safari
+doesn't understand height:100% in that situation and 2) the 100vh created some vertical scrolling */
+
+#opening-animation-container {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 30px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-self: center;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    overflow-y: hidden;
+}
+
+/* I added this webkit property to remove the scroll bar from safari versions of the website */
+
+#opening-animation-container::-webkit-scrollbar {
+    display: none;
+}
+
+.opening-animation-container-item {
+    /* font-weight: 400; */
+    width: 90%;
+    font-weight: 500;
+    font-size: 10vh;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    overflow: hidden;
+}
+
+/* 2.2 "Tongue Dance Project" */
+
+#opening-animation-text-group {
+    z-index: 1;
+    /* min-width: 92%; */
+    min-height: 99vh;
+
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow: hidden;
+
+    transition: min-width 0.2s ease-in-out;
+}
+
+#opening-animation-text-group:hover {
+    cursor: pointer;
+}
+
+.opening-animation-text-group-shadow {
+    box-shadow: 7px 1px 15px black;
+    overflow: hidden;
+}
+
+.opening-animation-text-group-fade {
+    
+    animation-name: opening-animation-text-group-fade;
+    animation-duration: 0.6s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes opening-animation-text-group-fade {
+    100% {
+        opacity: 0;
+    }
+}
+
+/* the following code handles the visibility of the text in the introduction. i have the text visibile when the horizontal lines are fully expanded */
+
+#tongue {
+
+    visibility: hidden;
+    animation-name: opening-animation-text-group-insert;
+    animation-delay: 0.8s;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+
+}
+
+#dance {
+
+    visibility: hidden;
+    animation-name: opening-animation-text-group-insert;
+    animation-delay: 0.8s;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+
+}
+
+#project {
+
+    visibility: hidden;
+    animation-name: opening-animation-text-group-insert;
+    animation-delay: 0.8s;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes opening-animation-text-group-insert {
+
+    100% {
+        visibility: visible;
+    }
+}
+
+/* 2.3 Pulse Group */
+
+#opening-animation-pulse-group {
+    min-width: 100%;
+
+    animation-name: menu-color-tab;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0;
+    animation-timing-function: linear;
+
+    display: none;
+
+    transition-property: background-color;
+    transition-delay: 2s;
+    transition-duration: 2s;
+}
+
+#opening-animation-pulse-group:focus {
+    outline: none;
+}
+
+/* 2.4 Boxes */
+
+/* top-box-cover and bottom-box-cover end up at the location of top-box and bottom-box. top-box-cover and bottom box-cover were created so that I can manipulate the height of top-box- and -bottom-box with JavaScript. If I animate top-box and bottom-box, I cannot alter their heights with JavaScript, which is important to the scrolling effect */
+
+#top-box-cover {
+    z-index: 3;
+    width: 0%;
+    height: 50%;
+    z-index: 2;
+
+    position: fixed;
+    top: 0;
+
+    border-bottom: 3px solid white;
+    background-color: black;
+
+    animation-name: top-box-cover;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+    animation-iteration-count: 1;
+    animation-duration: 1.5s;
+}
+
+@keyframes top-box-cover {
+    0% {
+        width: 0%;
+        height: 50%;
+    }
+
+    19% {
+        width: 100%;
+        height: 50%;
+    }
+
+    50% {
+        width: 100%;
+        height: 50%;
+    }
+
+    70% {
+        width: 100%;
+        height: 20%;
+    }
+
+    100% {
+        width: 100%;
+        height: 20%;
+    }
+}
+
+#top-box {
+    visibility: hidden;
+
+    z-index: 2;
+    width: 100%;
+    height: 20%;
+
+    position: fixed;
+    top: 0;
+
+    border-bottom: 3px solid white;
+    background-color: black;
+    box-shadow: 7px 1px 15px black;
+}
+
+.top-box {
+
+    z-index: 2;
+    animation-name: top-box;
+    animation-delay: 1.5s;
+    animation-iteration-count: 1;
+    animation-duration: 0.001s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes top-box {
+    0% {
+        visibility: hidden;
+    }
+
+    100% {
+        visibility: visible;
+    }
+}
+
+#bottom-box-cover {
+    z-index: 3;
+    width: 0%;
+    height: 50%;
+    z-index: 2;
+
+    position: fixed;
+    bottom: 0;
+
+    border-top: 3px solid white;
+    background-color: black;
+
+    animation-name: top-box-cover;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+    animation-iteration-count: 1;
+    animation-duration: 1.5s;
+}
+
+@keyframes bottom-box-cover {
+    0% {
+        width: 0%;
+        height: 50%;
+    }
+
+    19% {
+        width: 100%;
+        height: 50%;
+    }
+
+    50% {
+        width: 100%;
+        height: 50%;
+    }
+
+    70% {
+        width: 100%;
+        height: 20%;
+    }
+
+    100% {
+        width: 100%;
+        height: 20%;
+    }
+}
+
+#bottom-box {
+    visibility: hidden;
+
+    z-index: 2;
+    width: 100%;
+    height: 20%;
+    /* align-self: flex-end; */
+
+    position: fixed;
+    bottom: 0;
+
+    border-top: 3px solid white;
+    background-color: black;
+    box-shadow: 7px 1px 15px black;
+}
+
+.bottom-box {
+    z-index: 2;
+    animation-name: bottom-box;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-duration: 0.001s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes bottom-box {
+    0% {
+        visibility: hidden;
+    }
+
+    100% {
+        visibility: visible;
+    }
+}
+
+.box-fade {
+    z-index: 2;
+    animation-name: box-fade;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+/* SECTION 3: Homepage */
+
+/* 3.1 Opening Animation */
+
+
+/* #revealDiv covers the menu and image and "reveals" the menu in 0.6s */
+/* revealDiv is used in The Company, Upcoming, Archive, and Contact pages */
+#revealDiv {
+    z-index: 999;
+    width: 0%;
+    height: 100%;
+
+    background-color: black;
+
+    /* position: fixed;
+    top: 0; */
+    position:relative;
+
+    display: flex;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.menu-presentation {
+
+    -webkit-animation-name: menu-presentation;
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    /* animation-iteration-count: unset; */
+
+    animation-name: menu-presentation;
+    animation-duration: 0.6s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    /* animation-iteration-count: unset; */
+}
+
+@keyframes menu-presentation {
+    0% {
+        background-color: black;
+        width: 0%;
+    }
+
+    100% {
+        background-color: black;
+        width: 100%;
+    }
+}
+
+#menu-container {
+    z-index: 1;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-size: 3vh;
+
+}
+
+#homepage-image {
+    opacity: 0;
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+}
+
+.homepage-image-fade {
+    animation-name: homepage-image-fade;
+    animation-duration: 0.9s;
+    animation-delay: 0.1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes homepage-image-fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 3.2 Menu Items */
+
+.menu-item {
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+
+    height: 100%;
+
+    display: flex;
+    align-content: center;
+
+    overflow-y: hidden;
+
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+}
+
+.menu-item::-webkit-scrollbar {
+    display: none;
+}
+
+#the-company-text-container {
+    z-index: 1;
+    box-shadow: 5px 0px 20px black;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+
+    transition: min-width 0.2s ease-in-out;
+
+}
+
+#upcoming-text-container {
+    z-index: 1;
+    box-shadow: 5px 0px 20px black;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+
+    transition: min-width 0.2s ease-in-out;
+
+}
+
+#archive-text-container {
+    z-index: 1;
+    box-shadow: 5px 0px 20px black;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+
+    transition: min-width 0.2s ease-in-out;
+
+}
+
+#contact-text-container {
+    z-index: 1;
+    box-shadow: 5px 0px 20px black;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+
+    transition: min-width 0.2s ease-in-out;
+}
+
+#menu-color-tab-1 {
+    opacity: 1;
+    min-width: 100%;
+
+    animation-name: menu-color-tab;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0.0s;
+    animation-timing-function: linear;
+}
+
+#menu-color-tab-2 {
+    opacity: 1;
+    min-width: 100%;
+
+    animation-name: menu-color-tab;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0.100s;
+    animation-timing-function: linear;
+}
+
+#menu-color-tab-3 {
+    opacity: 1;
+    min-width: 100%;
+
+    animation-name: menu-color-tab;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0.200s;
+    animation-timing-function: linear;
+}
+
+#menu-color-tab-4 {
+    opacity: 1;
+    min-width: 100%;
+
+    animation-name: menu-color-tab;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0.300s;
+    animation-timing-function: linear;
+}
+
+@keyframes menu-color-tab {
+    0% {
+        background-color:#000000;
+    }
+
+    10% {
+        background-color:#d6c7c7;
+    }
+
+    40%{
+        background-color:#d6c7c7;
+    }
+
+    45% {
+        background-color:#a59797;
+    }
+
+    55% {
+        background-color:#000000;
+    }
+}
+
+/* SECTION 4: Back to Menu */
+
+#back-to-menu-container {
+    z-index: 1;
+    display: flex;
+    color: white;
+    border-bottom: 2px solid white;
+    min-width: 100vw;
+    min-height: 50px;
+    background-color: black;
+
+    overflow-x: scroll;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    overflow-y: hidden;
+}
+
+#back-to-menu-container::-webkit-scrollbar {
+    display: none;
+}
+
+#back-to-menu-text-container {
+    align-self: center;
+    overflow: hidden;
+    z-index: 1;
+    min-width: 89vw;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 5px 0px 12px black;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    background-color: black;
+}
+
+#back-to-menu-text {
+    margin: 0px;
+    font-weight: 100;
+    font-size: 3.5vh;
+}
+
+#back-to-menu-tab {
+    min-width: 100vw;
+    animation-name: menu-color-tab;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0.7s;
+    animation-timing-function: linear;
+}
+
+/* SECTION 5: Background Image */
+
+#background-image {
+    filter: grayscale(1);
+    opacity: 0;
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.background-image-fade {
+
+    -webkit-animation-name: background-image-fade;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay: 0;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+
+    animation-name: background-image-fade;
+    animation-duration: 1s;
+    animation-delay: 0;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes background-image-fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* SECTION 6: Contact Page */
+
+#contact-page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+#contact-info-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#email-address1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    font-size: 25px;
+    letter-spacing: 3px;
+    z-index: 5;
+    text-align: center;
+    margin: 0;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
+#email-clipboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#email-address2 {
+    width: 150px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    font-size: 25px;
+    letter-spacing: 2px;
+    z-index: 5;
+    text-align: center;
+    margin: 0;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
+#clipboard-icon {
+    z-index: 1;
+    text-rendering: optimizeLegibility;
+    color: white;
+    font-size: 30px;
+    margin-left: 7px;
+    margin-right: 7px;
+    text-shadow: 2px 2px black;
+}
+
+#icon-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    z-index: 1;
+    text-rendering: optimizeLegibility;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 15px;
+    margin-left: 7px;
+    margin-right: 7px;
+    text-shadow: 2px 2px black;
+}
+
+/* SECTION 7: Archive Page */
+
+.archive-item {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#archive-page-container {
+    z-index: 1;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+#videos-container {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+#videos-title {
+    letter-spacing: 2px;
+}
+
+/* SECTION 8: Upcoming Page */
+
+#upcoming-page-container {
+    z-index: 1;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+#classes-title {
+    letter-spacing: 2px;
+    width: fit-content;
+}
+
+#classes-container {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+#description-container {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+#find-out-more {
+    width: fit-content;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-shadow: 2px 0px black;
+}
+
+#arrow {
+    color: white;
+    margin-left: 5px;
+    text-shadow: 2px 0px black;
+}
+
+/* SECTION 9: The Company Page */
+
+#the-company-page-container {
+    z-index: 1;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.the-company-page-text {
+    margin-right: 16px;
+    max-width: 600px;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+#content-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    scrollbar-color: rgba(65, 65, 65, 0.75) rgba(0, 0, 0, 0);
+}
+
+#content-container::-webkit-scrollbar {
+    background: rgb(53, 53, 53);
+}
+
+#content-container::-webkit-scrollbar-thumb {
+    background: rgba(90, 90, 90, 0.75);
+}
+
+#content-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.75);
+    cursor: pointer;
+}
+
+#title-and-history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+}
+
+#TDP-history-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#TDP-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    align-self: flex-start;
+}
+
+#TDP-history {
+    margin-right: 16px;
+    max-width: 600px;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+.bio-pictures {
+    /* width: 60vw; */
+    max-width: 275px;
+    margin-left: 16px;
+    margin-top: 16px;
+
+    filter: grayscale(1);
+    opacity: 0.8;
+}
+
+.person-and-title {
+    font-size: 25px;
+    font-weight: 900;
+    border-bottom: 1px solid white;
+}
+
+#steph-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#lauren-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#adri-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#anna-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#taylor-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#beth-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#willow-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 5vw;
+}
+
+#darienne-container-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 30vh;
+}
+
+#darienne-container-desktop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 75px;
+}
+
+/* SECTION 10: Media Queries */
+
+@media screen and (max-width: 330px) {
+    #TDP-history-container {
+        min-height: 130vh;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+
+    #tongue {
+        margin-left: 7vw;
+    
+    }
+    
+    #dance {
+        margin-left: 7vw;
+    
+    }
+    
+    #project {
+        margin-left: 7vw;
+    
+    }
+
+    .menu-item-inner-html {
+        font-size: 50px;
+    }
+
+    #back-to-menu-text-container {
+        min-width: 93vw;
+    }
+
+    .the-company-page-text {
+        max-width: 400px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+
+    h1 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    #tongue {
+        margin-left: 3vw;
+    
+    }
+    
+    #dance {
+        margin-left: 3vw;
+    
+    }
+    
+    #project {
+        margin-left: 3vw;
+    
+    }
+
+    #back-to-menu-text-container {
+        min-width: 94vw;
+    }
+
+    #back-to-menu-container {
+        min-height: 50px;
+    }
+
+    #email-address1 {
+        font-size: 30px;
+    }
+    
+    #email-address2 {
+        min-width: 175px;
+        font-size: 30px;
+    }
+    
+    #clipboard-icon {
+        font-size: 35px;
+    }
+    
+    .icon {
+        font-size: 35px;
+    }
+
+    .the-company-page-text {
+        max-width: 600px;
+    }
+
+    #TDP-history {
+        max-width: 800px;
+    }
+  }
+
+  @media screen and (min-width: 1300px) {
+    .the-company-page-text {
+        max-width: 600px;
+    }
+  }
+
+  @media screen and (orientation:landscape) {
+    #back-to-menu-text-container {
+        min-width: 94vw;
+    }
+  }

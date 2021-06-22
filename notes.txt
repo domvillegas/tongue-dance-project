@@ -1,0 +1,10 @@
+
+
+general to-do:
+1) "you need javascript enabled to use this website. if you need to contact tongue, you can reach us here __________"
+
+
+ideas:
+
+1) have a video of a single dancer's silhouette. have this person always in one posiion in the viewport.
+--maybe fade between different people moving. for example: adri's silhouette is moving then fades to beth who fades to taylor etc.
